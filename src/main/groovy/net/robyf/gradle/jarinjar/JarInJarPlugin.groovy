@@ -11,8 +11,16 @@ import org.gradle.api.internal.plugins.DefaultArtifactPublicationSet
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
+/**
+ * The JarInJar plugin.
+ *
+ * @author Roberto Fasciolo
+ */
 class JarInJarPlugin implements Plugin<Project> {
 
+    /**
+     * Apply the plugin to a project.
+     */
     void apply(Project project) {
         //project.getPluginManager().apply(JavaPlugin.class);
     

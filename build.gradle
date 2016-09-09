@@ -16,3 +16,19 @@ dependencies {
     compile localGroovy()
     testCompile 'junit:junit:4.12'
 }
+
+task sourceJar(type: Jar) {
+    description = "An archive of the source code for Maven Central"
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task groovydocJar(type: Jar) {
+    description = "An archive of the GroovyDocs for Maven Central"
+    classifier = 'javadoc'
+    from groovydoc
+}
+
+artifacts {
+    archives jar, groovydocJar, sourceJar
+}
