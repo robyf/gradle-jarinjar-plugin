@@ -7,7 +7,12 @@ wrapper {
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     compile gradleApi()
     compile localGroovy()
+    testCompile 'junit:junit:4.12'
 }
