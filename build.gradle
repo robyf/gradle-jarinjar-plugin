@@ -1,0 +1,10 @@
+apply plugin: 'groovy'
+
+wrapper {
+    gradleVersion = '3.0'
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
