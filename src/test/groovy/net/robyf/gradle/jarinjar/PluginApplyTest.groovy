@@ -21,7 +21,7 @@ class PluginApplyTest {
 
     @Test
     void applyPlugin() {
-        project.apply plugin: 'net.robyf.gradle.jarinjar'
+        project.apply plugin: 'net.robyf.jarinjar'
         assertTrue("Plugin missing", project.plugins.hasPlugin(JarInJarPlugin))
         assertNotNull("Plugin configuration missing", project.executableJar)
         assertNull("Main class not null in configuration", project.executableJar.mainClass)
@@ -29,14 +29,14 @@ class PluginApplyTest {
 
     @Test
     void defaultConfigurationWithoutJavaPlugin() {
-        project.apply plugin: 'net.robyf.gradle.jarinjar'
+        project.apply plugin: 'net.robyf.jarinjar'
         assertNull("Configuration not null", project.executableJar.configuration)
     }
 
     @Test
     void defaultConfigurationWithJavaPlugin() {
         project.apply plugin: 'java'
-        project.apply plugin: 'net.robyf.gradle.jarinjar'
+        project.apply plugin: 'net.robyf.jarinjar'
         assertEquals("Configuration not runtime", project.configurations.runtime, project.executableJar.configuration)
     }
 
