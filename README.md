@@ -1,2 +1,2 @@
 # gradle-jarinjar-plugin
-Eclipse Jar in Jar packages as gradle plugin
+A repackaging of Eclipse's jar in jar loader easily usable as gradle plugin.
