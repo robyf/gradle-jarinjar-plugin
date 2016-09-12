@@ -1,4 +1,6 @@
 apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 wrapper {
     gradleVersion = '3.0'
@@ -6,6 +8,24 @@ wrapper {
 
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
+
+group = 'net.robyf'
+archivesBaseName = 'gradle-jarinjar-plugin'
+version = '1.0-SNAPSHOT'
+
+ext.isSnapshot = version.endsWith("SNAPSHOT")
+
+if ( isSnapshot ) {
+    println "Using snapshot repository for artifact uploads"
+    ext.mavenCentralUploadUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+} else {
+    println "Using staging repository for artifact uploads"
+    ext.mavenCentralUploadUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+}
+
+configurations {
+    archives
+}
 
 repositories {
     jcenter()
@@ -31,4 +51,57 @@ task groovydocJar(type: Jar) {
 
 artifacts {
     archives jar, groovydocJar, sourceJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    if (gradle.startParameter.taskNames.contains("uploadArchives")) {
+        repositories {
+            mavenDeployer {
+                if (signing.signatory) {
+                    beforeDeployment {
+                        signing.signPom(it)
+                    }
+                }
+                configuration = configurations.archives
+                repository(url: mavenCentralUploadUrl) {
+                    authentication(userName: mavenUsername, password: mavenPassword)
+                    releases(updatePolicy: "always")
+                    snapshots(updatePolicy: "always")
+                }
+                pom.project(pomConfiguration)
+            }
+        }
+    }
+}
+
+def getPomConfiguration() {
+    return {
+        name 'Gradle JarInJar Plugin'
+        packaging 'jar'
+        description 'A Gradle plugin for generating self-contained executable jars.'
+        url 'https://github.com/robyf/gradle-jarinjar-plugin'
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+            }
+        }
+        developers {
+            developer {
+                id 'robyf'
+                name 'Roberto Fasciolo'
+                email 'rob@robyf.net'
+            }
+        }
+        scm {
+            connection 'scm:https://robyf@github.com/robyf/gradle-jarinjar-plugin'
+            developerConnection 'scm:git@github.com:robyf/gradle-jarinjar-plugin.git'
+            url 'https://github.com/robyf/gradle-jarinjar-plugin'
+        }
+    }
 }
