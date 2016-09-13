@@ -14,6 +14,10 @@ node {
     stage("Publish reports") {
         publishUnitTestResults()
     }
+    
+    stage("Upload archives") {
+        sh "./gradlew --info uploadArchives"
+    }
 }
 
 def publishUnitTestResults() {
