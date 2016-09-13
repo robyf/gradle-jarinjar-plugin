@@ -1,5 +1,8 @@
 # gradle-jarinjar-plugin
-A repackaging of Eclipse's jar in jar loader easily usable as gradle plugin.
+A repackaging of Eclipse's jar in jar loader easily usable as gradle plugin. It configures the default ```jar``` task so that the generated file
+contains all the needed dependencies without any need to distribute them separately.
+
+It uses eclipse's jar in jar implementation for running the jar.
 
 #Usage
 
