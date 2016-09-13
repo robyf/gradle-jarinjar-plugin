@@ -5,10 +5,13 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.UnknownConfigurationException
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.api.initialization.Settings
 import org.gradle.api.internal.artifacts.publish.ArchivePublishArtifact
 import org.gradle.api.internal.java.JavaLibrary
 import org.gradle.api.internal.plugins.DefaultArtifactPublicationSet
+import org.gradle.api.invocation.Gradle
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.plugins.PluginAware
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 /**
@@ -16,12 +19,28 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin
  *
  * @author Roberto Fasciolo
  */
-class JarInJarPlugin implements Plugin<Project> {
+class JarInJarPlugin implements Plugin<PluginAware> {
+ 
+    def void apply(PluginAware pluginAware) {
+        if (pluginAware instanceof Project) {
+            doApply(pluginAware)
+        } else if (pluginAware instanceof Settings) {
+            pluginAware.gradle.allprojects { p ->
+                p.plugins.apply(JarInJarPlugin)
+            }
+        } else if (pluginAware instanceof Gradle) {
+            pluginAware.allprojects { p ->
+                p.plugins.apply(JarInJarPlugin)
+            }
+        } else {
+            throw new IllegalArgumentException("${pluginAware.getClass()} is currently not supported as an apply target, please report if you need it")
+        }
+    }
 
     /**
      * Apply the plugin to a project.
      */
-    void apply(Project project) {
+    void doApply(Project project) {
         //project.getPluginManager().apply(JavaPlugin.class);
     
         def extension = project.extensions.create('executableJar', JarInJarPluginExtension)
