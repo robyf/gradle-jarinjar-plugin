@@ -13,6 +13,24 @@ group = 'net.robyf'
 archivesBaseName = 'gradle-jarinjar-plugin'
 version = '1.0-SNAPSHOT'
 
+ext.majorVersion = 1
+ext.minorVersion = 0
+ext.patchVersion = 0
+
+def computeVersionNumber() {
+    def computedVersion
+    ext.env = System.getenv()
+    ext.branchName = env.BRANCH_NAME
+    if (ext.branchName == "master") {
+        ext.buildNumber = env.BUILD_NUMBER?.toInteger()
+        computedVersion = "${majorVersion}.${minorVersion}.${patchVersion}.${buildNumber}"
+    } else {
+        computedVersion = "${majorVersion}.${minorVersion}-SNAPSHOT"
+    }
+    return computedVersion
+}
+
+version = computeVersionNumber()
 ext.isSnapshot = version.endsWith("SNAPSHOT")
 
 if ( isSnapshot ) {
