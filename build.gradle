@@ -1,6 +1,18 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.5"
+    }
+}
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: "com.gradle.plugin-publish"
 
 wrapper {
     gradleVersion = '3.0'
@@ -120,6 +132,20 @@ def getPomConfiguration() {
             connection 'scm:https://robyf@github.com/robyf/gradle-jarinjar-plugin'
             developerConnection 'scm:git@github.com:robyf/gradle-jarinjar-plugin.git'
             url 'https://github.com/robyf/gradle-jarinjar-plugin'
+        }
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/robyf/gradle-jarinjar-plugin'
+    vcsUrl = 'https://github.com/robyf/gradle-jarinjar-plugin.git'
+    description = 'A Gradle plugin for generating self-contained executable jar files.'
+    tags = [ 'gradle', 'jarinjar' ]
+
+    plugins {
+        gradleLiquibasePlugin {
+            id = 'net.robyf.jarinjar'
+            displayName = 'Gradle Cobertura plugin'
         }
     }
 }
