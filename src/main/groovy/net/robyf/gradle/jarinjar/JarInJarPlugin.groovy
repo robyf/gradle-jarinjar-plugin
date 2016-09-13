@@ -41,7 +41,7 @@ class JarInJarPlugin implements Plugin<PluginAware> {
      * Apply the plugin to a project.
      */
     void doApply(Project project) {
-        //project.getPluginManager().apply(JavaPlugin.class);
+        project.getPluginManager().apply(JavaPlugin.class);
     
         def extension = project.extensions.create('executableJar', JarInJarPluginExtension)
         try {

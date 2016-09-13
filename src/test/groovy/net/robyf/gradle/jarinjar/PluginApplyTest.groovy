@@ -26,13 +26,13 @@ class PluginApplyTest {
         assertNotNull("Plugin configuration missing", project.executableJar)
         assertNull("Main class not null in configuration", project.executableJar.mainClass)
     }
-
+/*
     @Test
     void defaultConfigurationWithoutJavaPlugin() {
         project.apply plugin: 'net.robyf.jarinjar'
         assertNull("Configuration not null", project.executableJar.configuration)
     }
-
+*/
     @Test
     void defaultConfigurationWithJavaPlugin() {
         project.apply plugin: 'java'
