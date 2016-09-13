@@ -52,7 +52,7 @@ class JarInJarPlugin implements Plugin<PluginAware> {
         
         project.afterEvaluate {
             project.jar {
-                from project.executableJar.configuration
+                from project.extensions.executableJar.configuration
                 
                 def pluginJarFile = project.buildscript.configurations.classpath.find { it.getName().startsWith('gradle-jarinjar-plugin') && it.getName().endsWith('jar') }
                 from project.zipTree(pluginJarFile.getAbsolutePath()).matching {
@@ -62,8 +62,8 @@ class JarInJarPlugin implements Plugin<PluginAware> {
                 manifest {
                     attributes 'Main-Class': 'org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader'
                     attributes 'Class-Path': '.'
-                    attributes 'Rsrc-Class-Path': './ ' + project.executableJar.configuration.collect { it.getName() }.join(' ')
-                    attributes 'Rsrc-Main-Class': project.executableJar.mainClass
+                    attributes 'Rsrc-Class-Path': './ ' + project.extensions.executableJar.configuration.collect { it.getName() }.join(' ')
+                    attributes 'Rsrc-Main-Class': project.extensions.executableJar.mainClass
                 }
             }
         }
