@@ -53,6 +53,10 @@ repositories {
     jcenter()
 }
 
+dependencies {
+    compile group: 'org.json', name: 'json', version: '20160810'
+}
+
 executableJar {
     mainClass 'com.example.MainClass'
 }
