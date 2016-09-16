@@ -36,3 +36,25 @@ The behavior of this plugin is controlled by setting various options in the ```e
 block of your build.gradle file.
 - ```mainClass = <class name>```: The name of the class to be executed when running the jar.
 - ```configuration = <configuration>```: Class path used when running the jar. The default is ```runtime```.
+
+## Example
+```groovy
+plugins {
+    id "net.robyf.jarinjar" version "1.0.0.5"
+}
+
+apply plugin: 'java'
+
+wrapper {
+    gradleVersion = '3.0'
+}
+
+repositories {
+    jcenter()
+}
+
+executableJar {
+    mainClass 'com.example.MainClass'
+}
+```
+and just run ```./gradlew jar```.
