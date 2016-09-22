@@ -30,7 +30,6 @@ archivesBaseName = 'gradle-jarinjar-plugin'
 
 ext.majorVersion = 1
 ext.minorVersion = 0
-ext.patchVersion = 0
 
 def computeVersionNumber() {
     def computedVersion
@@ -38,7 +37,7 @@ def computeVersionNumber() {
     ext.branchName = env.BRANCH_NAME
     if (ext.branchName == "master") {
         ext.buildNumber = env.BUILD_NUMBER?.toInteger()
-        computedVersion = "${majorVersion}.${minorVersion}.${patchVersion}.${buildNumber}"
+        computedVersion = "${majorVersion}.${minorVersion}.${buildNumber}"
     } else {
         computedVersion = "${majorVersion}.${minorVersion}-SNAPSHOT"
     }
