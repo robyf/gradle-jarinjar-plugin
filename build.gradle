@@ -167,7 +167,7 @@ bintray {
 pluginBundle {
     website = 'https://github.com/robyf/gradle-jarinjar-plugin'
     vcsUrl = 'https://github.com/robyf/gradle-jarinjar-plugin.git'
-    description = 'A Gradle plugin for generating self-contained executable jar files.'
+    description = 'A Gradle plugin for generating self-contained executable jar files.<br><a href="https://github-com/robyf/gradle-jarinjar-plugin">https://github-com/robyf/gradle-jarinjar-plugin</a>'
     tags = [ 'gradle', 'jarinjar' ]
 
     plugins {
