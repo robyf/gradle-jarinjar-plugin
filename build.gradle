@@ -9,6 +9,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.jfrog.bintray" version "1.7.1"
+}
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'signing'
@@ -23,7 +27,6 @@ targetCompatibility = '1.6'
 
 group = 'net.robyf'
 archivesBaseName = 'gradle-jarinjar-plugin'
-version = '1.0-SNAPSHOT'
 
 ext.majorVersion = 1
 ext.minorVersion = 0
@@ -132,6 +135,32 @@ def getPomConfiguration() {
             connection 'scm:https://robyf@github.com/robyf/gradle-jarinjar-plugin'
             developerConnection 'scm:git@github.com:robyf/gradle-jarinjar-plugin.git'
             url 'https://github.com/robyf/gradle-jarinjar-plugin'
+        }
+    }
+}
+
+bintray {
+    user = bintrayUsername
+    key = bintrayApiKey
+
+    configurations = [ 'archives' ]
+
+    pkg {
+        repo = 'maven-repo'
+        name = 'gradle-jarinjar-plugin'
+        desc = 'A Gradle plugin for generating self-contained executable jar files.'
+        licenses = [ 'Apache-2.0' ]
+        websiteUrl = 'https://github.com/robyf/gradle-jarinjar-plugin'
+        issueTrackerUrl = 'https://github.com/robyf/gradle-jarinjar-plugin/issues'
+        vcsUrl = 'https://github.com/robyf/gradle-jarinjar-plugin.git'
+        labels = [ 'gradle', 'jarinjar' ]
+        publicDownloadNumbers = true
+        version {
+            name = version
+            // vcsTag = version
+            attributes = [
+                'gradle-plugin': 'net.robyf.gradle.jarinjar:net.robyf:gradle-jarinjar-plugin'
+            ]
         }
     }
 }
