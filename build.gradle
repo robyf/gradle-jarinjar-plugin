@@ -173,7 +173,7 @@ pluginBundle {
     plugins {
         gradleLiquibasePlugin {
             id = 'net.robyf.jarinjar'
-            displayName = 'Gradle Cobertura plugin'
+            displayName = 'Gradle Jar in jar plugin'
         }
     }
 }
