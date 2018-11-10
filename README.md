@@ -4,9 +4,9 @@ contains all the needed dependencies without any need to distribute them separat
 
 It uses eclipse's jar in jar implementation for running the jar.
 
-#Usage
+# Usage
 
-##Apply the plugin
+## Apply the plugin
 To use the plugin with Gradle 2.1 or later, add the following to your build.gradle file:
 ```groovy
 plugins {
