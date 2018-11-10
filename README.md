@@ -10,7 +10,7 @@ It uses eclipse's jar in jar implementation for running the jar.
 To use the plugin with Gradle 2.1 or later, add the following to your build.gradle file:
 ```groovy
 plugins {
-  id 'net.robyf.jarinjar' version '1.0.8'
+  id 'net.robyf.jarinjar' version '1.0.9'
 }
 ```
 
@@ -25,7 +25,7 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
     dependencies {
-        classpath "net.robyf:gradle-jarinjar-plugin:1.0.8"
+        classpath "net.robyf:gradle-jarinjar-plugin:1.0.9"
     }
 }
 apply plugin: 'net.robyf.jarinjar'
@@ -40,7 +40,7 @@ block of your build.gradle file.
 ## Example
 ```groovy
 plugins {
-    id "net.robyf.jarinjar" version "1.0.8"
+    id "net.robyf.jarinjar" version "1.0.9"
 }
 
 apply plugin: 'java'
